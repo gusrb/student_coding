@@ -11,6 +11,22 @@ typedef struct vertex {
 vector<Vertex> graph[MAXV + 1];
 int v_num, e_num;      
 
+void make_graph(bool directed)
+{
+	int x, y, w;
+	Vertex node;
+	cin >> v_num >> e_num;
+	for (int i = 0; i < e_num; i++) {
+		cin >> x >> y >> w;
+		node.y = y; node.w = w;
+		graph[x].push_back(node);
+		if (!directed) {
+			node.y = x;
+			graph[y].push_back(node);
+		}
+	}
+}
+
 void dfs(int color[], int u)
 {
 	color[u] = 1;
@@ -33,9 +49,6 @@ void dfs_traverse()
 		if (color[i] == 0)
 			dfs(color, i);
 }
-
-
-
 
 int main()
 {
